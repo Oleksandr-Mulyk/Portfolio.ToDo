@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/Portfolio.ToDo.GRPC/appsettings.json
+/Portfolio.ToDo.GRPC/appsettings.Development.json
+/Portfolio.ToDo.GRPC/Migrations
