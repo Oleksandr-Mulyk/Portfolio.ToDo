@@ -14,6 +14,9 @@ string connectionString =
     throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
 
+builder.Services.AddTransient<ApplicationDbContext>();
+builder.Services.AddTransient<IToDoRepository, ToDoRepository>();
+
 var app = builder.Build();
 
 app.MapDefaultEndpoints();
