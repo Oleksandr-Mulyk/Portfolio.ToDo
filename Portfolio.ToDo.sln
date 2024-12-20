@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35514.174 d17.12
+VisualStudioVersion = 17.12.35514.174
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portfolio.ToDo.GRPC", "Portfolio.ToDo.GRPC\Portfolio.ToDo.GRPC.csproj", "{7553F412-961E-4CD1-B711-3997D6881065}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portfolio.ToDo.ServiceDefaults", "Portfolio.ToDo.ServiceDefaults\Portfolio.ToDo.ServiceDefaults.csproj", "{D5EC8BCA-C208-46BE-BD81-88EBCEEFA20D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portfolio.ToDo.ToDoList", "Portfolio.ToDo.ToDoList\Portfolio.ToDo.ToDoList.csproj", "{D10EA74C-5491-4941-8715-486A27F5D52C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portfolio.ToDo.GRPC.UnitTest", "Portfolio.ToDo.GRPC.UnitTest\Portfolio.ToDo.GRPC.UnitTest.csproj", "{CDBAEDC1-73E8-4850-8ABA-207D82DDE43B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{D10EA74C-5491-4941-8715-486A27F5D52C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D10EA74C-5491-4941-8715-486A27F5D52C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D10EA74C-5491-4941-8715-486A27F5D52C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDBAEDC1-73E8-4850-8ABA-207D82DDE43B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDBAEDC1-73E8-4850-8ABA-207D82DDE43B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDBAEDC1-73E8-4850-8ABA-207D82DDE43B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDBAEDC1-73E8-4850-8ABA-207D82DDE43B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

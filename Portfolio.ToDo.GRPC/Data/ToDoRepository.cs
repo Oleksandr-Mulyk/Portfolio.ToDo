@@ -8,8 +8,8 @@ namespace Portfolio.ToDo.GRPC.Data
         public async Task<IToDoItem> GetItemByIdAsync(Guid id)
             => await applicationDbContext.ToDoItems.FindAsync(id) ?? throw new KeyNotFoundException();
 
-        public async Task<IEnumerable<IToDoItem>> GetItemListAsync()
-            => await applicationDbContext.ToDoItems.ToListAsync();
+        public async Task<IQueryable<IToDoItem>> GetItemListAsync()
+            => await Task.FromResult(applicationDbContext.ToDoItems.AsQueryable());
 
         public async Task<IToDoItem> SaveItemAsync(IToDoItem item)
         {
@@ -43,6 +43,10 @@ namespace Portfolio.ToDo.GRPC.Data
                 applicationDbContext.ToDoItems.Remove(toDoItem as ToDoItem ?? throw new InvalidCastException());
                 await applicationDbContext.SaveChangesAsync();
                 return true;
+            }
+            catch (KeyNotFoundException)
+            {
+                throw;
             }
             catch (Exception ex)
             {
