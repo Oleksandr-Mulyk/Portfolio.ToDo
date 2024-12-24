@@ -31,15 +31,17 @@ namespace Portfolio.ToDo.GRPC.Services
 
         public override async Task<ToDoItemProto> Post(ToDoItemProto toDoItemProto, ServerCallContext context)
         {
+
             IToDoItem toDoItem = new ToDoItem
             {
-                Id = Guid.Parse(toDoItemProto.Id),
+                Id = toDoItemProto is null ? Guid.Parse(toDoItemProto!.Id) : Guid.Empty,
                 Title = toDoItemProto.Title,
                 Description = toDoItemProto.Description,
                 IsComplete = toDoItemProto.IsComplete,
                 SortOrder = toDoItemProto.SortOrder
             };
-            var result = await toDoRepository.SaveItemAsync(toDoItem);
+
+            IToDoItem result = await toDoRepository.SaveItemAsync(toDoItem);
 
             return ToProto(result);
         }
