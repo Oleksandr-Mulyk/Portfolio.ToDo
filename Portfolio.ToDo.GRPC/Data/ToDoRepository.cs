@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Portfolio.ToDo.ToDoList;
+﻿using Portfolio.ToDo.ToDoList;
 
 namespace Portfolio.ToDo.GRPC.Data
 {

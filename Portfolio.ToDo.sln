@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portfolio.ToDo.ToDoList", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portfolio.ToDo.GRPC.UnitTest", "Portfolio.ToDo.GRPC.UnitTest\Portfolio.ToDo.GRPC.UnitTest.csproj", "{CDBAEDC1-73E8-4850-8ABA-207D82DDE43B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portfolio.ToDo.Web", "Portfolio.ToDo.Web\Portfolio.ToDo.Web.csproj", "{34B696F5-3ACB-409B-9097-D6852989F429}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{CDBAEDC1-73E8-4850-8ABA-207D82DDE43B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CDBAEDC1-73E8-4850-8ABA-207D82DDE43B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CDBAEDC1-73E8-4850-8ABA-207D82DDE43B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34B696F5-3ACB-409B-9097-D6852989F429}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34B696F5-3ACB-409B-9097-D6852989F429}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34B696F5-3ACB-409B-9097-D6852989F429}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34B696F5-3ACB-409B-9097-D6852989F429}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

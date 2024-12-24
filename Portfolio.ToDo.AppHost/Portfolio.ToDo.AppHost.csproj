@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Portfolio.ToDo.GRPC\Portfolio.ToDo.GRPC.csproj" />
+    <ProjectReference Include="..\Portfolio.ToDo.Web\Portfolio.ToDo.Web.csproj" />
   </ItemGroup>
 
 </Project>
