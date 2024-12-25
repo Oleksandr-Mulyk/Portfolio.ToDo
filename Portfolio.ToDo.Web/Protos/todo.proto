@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+option csharp_namespace = "Portfolio.ToDo.Web";
+
+package todo;
+
+import "google/protobuf/empty.proto";
+
+service ToDoService {
+	rpc GetById(ToDoIdRequest) returns (ToDoItemProto);
+	rpc GetAll(google.protobuf.Empty) returns (ToDoListResponse);
+	rpc Post(ToDoItemProto) returns (ToDoItemProto);
+	rpc Delete(ToDoIdRequest) returns (ToDoDeleteResponse);
+}
+
+message ToDoIdRequest {
+	string Id = 1;
+}
+
+message ToDoItemProto {
+	string Id = 1;
+	string Title = 2;
+	string Description = 3;
+	bool IsComplete = 4;
+	int32 SortOrder = 5;
+}
+
+message ToDoListResponse {
+	repeated ToDoItemProto Items = 1;
+}
+
+message ToDoDeleteResponse {
+	bool Complete = 1;
+}

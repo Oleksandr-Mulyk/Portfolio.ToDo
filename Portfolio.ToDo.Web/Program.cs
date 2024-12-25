@@ -1,4 +1,6 @@
+using Grpc.Net.Client;
 using Portfolio.ToDo.GRPC.Data;
+using Portfolio.ToDo.Web;
 using Portfolio.ToDo.Web.Components;
 using Portfolio.ToDo.Web.Data;
 
@@ -10,7 +12,11 @@ builder.AddServiceDefaults();
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-builder.Services.AddTransient<IToDoRepository, ToDoRepository>();
+string? grpcAddress = builder.Configuration.GetValue<string>("GrpcSettings:Address");
+using GrpcChannel channel = GrpcChannel.ForAddress(grpcAddress ?? throw new Exception("gRPC address is not set"));
+ToDoService.ToDoServiceClient client = new(channel);
+
+builder.Services.AddTransient<IToDoRepository, ToDoRepository>(provider => new ToDoRepository(client));
 
 var app = builder.Build();
 
@@ -25,7 +31,6 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 
 app.UseAntiforgery();
 

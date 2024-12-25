@@ -1,9 +1,11 @@
-﻿using Portfolio.ToDo.GRPC.Data;
+﻿using Google.Protobuf.WellKnownTypes;
+using Grpc.Core;
+using Portfolio.ToDo.GRPC.Data;
 using Portfolio.ToDo.ToDoList;
 
 namespace Portfolio.ToDo.Web.Data
 {
-    public class ToDoRepository : IToDoRepository
+    public class ToDoRepository(ToDoService.ToDoServiceClient client) : IToDoRepository
     {
         public Task<IToDoItem> GetItemByIdAsync(Guid id)
         {
@@ -12,13 +14,25 @@ namespace Portfolio.ToDo.Web.Data
 
         public async Task<IQueryable<IToDoItem>> GetItemListAsync()
         {
-            IQueryable<IToDoItem> items = new List<ToDoItem>
+            try
             {
-                new() { Id = Guid.NewGuid(), Title = "Task 1", Description = "Description 1", IsComplete = false, SortOrder = 1 },
-                new() { Id = Guid.NewGuid(), Title = "Task 2", Description = "Description 2", IsComplete = true, SortOrder = 2 },
-            }.AsQueryable();
+                ToDoListResponse response = await client.GetAllAsync(new Empty());
 
-            return items;
+                IQueryable<IToDoItem> items = response.Items.Select(item => new ToDoItem
+                {
+                    Id = Guid.Parse(item.Id),
+                    Title = item.Title,
+                    Description = item.Description,
+                    IsComplete = item.IsComplete,
+                    SortOrder = item.SortOrder
+                }).AsQueryable<IToDoItem>();
+
+                return items;
+            }
+            catch (RpcException e)
+            {
+                throw new Exception($"gRPC error: {e.Status.Detail}");
+            }
         }
 
         public Task<IToDoItem> SaveItemAsync(IToDoItem item)

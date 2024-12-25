@@ -2,22 +2,29 @@
 
 <h3>Todolist</h3>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Is Complete</th>
-            <th>Sort Order</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in _toDoItems)
-        {
+@if (_toDoItems != null && _toDoItems.Any())
+{
+    <table class="table">
+        <thead>
             <tr>
-                <td>@item.Title</td>
-                <td>@item.IsComplete</td>
-                <td>@item.SortOrder</td>
+                <th>Title</th>
+                <th>Is Complete</th>
+                <th>Sort Order</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in _toDoItems)
+            {
+                <tr>
+                    <td>@item.Title</td>
+                    <td>@item.IsComplete</td>
+                    <td>@item.SortOrder</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No items to display.</p>
+}
