@@ -44,7 +44,6 @@
                             <span @onclick="() => EditItem(item.Id, true)">@item.Title</span>
                         }
                     </td>
-                    <td>@item.SortOrder</td>
                     <td>
                         <button class="btn btn-link" @onclick="() => ToggleDetails(item.Id)">
                             Details
@@ -53,6 +52,14 @@
                     <td>
                         <button class="btn btn-danger" @onclick="() => DeleteItem(item.Id)">
                             Delete
+                        </button>
+                    </td>
+                    <td>
+                        <button class="btn btn-secondary" @onclick="() => MoveItemUp(item)">
+                            ↑
+                        </button>
+                        <button class="btn btn-secondary" @onclick="() => MoveItemDown(item)">
+                            ↓
                         </button>
                     </td>
                 </tr>

@@ -28,7 +28,7 @@ namespace Portfolio.ToDo.Web.Data
             {
                 ToDoListResponse response = await client.GetAllAsync(new Empty());
 
-                return response.Items.Select(ProtoToToDoItem).AsQueryable();
+                return response.Items.Select(ProtoToToDoItem).OrderBy(item => item.SortOrder).AsQueryable();
             }
             catch (RpcException e)
             {

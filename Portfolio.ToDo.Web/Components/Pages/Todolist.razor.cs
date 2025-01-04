@@ -66,5 +66,37 @@ namespace Portfolio.ToDo.Web.Components.Pages
             item.IsComplete = (bool)(e.Value ?? false);
             await SaveEditItem(item);
         }
+
+        private async Task MoveItemUp(IToDoItem item)
+        {
+            int index = _toDoItems.IndexOf(item);
+            if (index > 0)
+            {
+                _toDoItems.RemoveAt(index);
+                _toDoItems.Insert(index - 1, item);
+                await UpdateSortOrder();
+            }
+        }
+
+        private async Task MoveItemDown(IToDoItem item)
+        {
+            int index = _toDoItems.IndexOf(item);
+            if (index < _toDoItems.Count - 1)
+            {
+                _toDoItems.RemoveAt(index);
+                _toDoItems.Insert(index + 1, item);
+                await UpdateSortOrder();
+            }
+        }
+
+        private async Task UpdateSortOrder()
+        {
+            for (int i = 0; i < _toDoItems.Count; i++)
+            {
+                _toDoItems[i].SortOrder = i;
+                await repository.SaveItemAsync(_toDoItems[i]);
+            }
+            _toDoItems = [.. (await repository.GetItemListAsync())];
+        }
     }
 }
