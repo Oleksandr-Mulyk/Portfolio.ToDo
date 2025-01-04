@@ -40,6 +40,7 @@ namespace Portfolio.ToDo.Web.Components.Pages
 
         private async Task AddItem()
         {
+            _newItem.SortOrder = _toDoItems.OrderByDescending(i => i.SortOrder).FirstOrDefault()?.SortOrder + 1 ?? 0;
             await repository.SaveItemAsync(_newItem);
             _toDoItems = [.. (await repository.GetItemListAsync())];
             _showAddForm = false;
