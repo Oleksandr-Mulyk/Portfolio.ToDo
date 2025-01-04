@@ -10,6 +10,10 @@ namespace Portfolio.ToDo.Web.Components.Pages
 
         private Guid? _expandedItemId;
 
+        private bool _showAddForm = false;
+
+        private ToDoItem _newItem = new();
+
         protected override async Task OnInitializedAsync() => _toDoItems = [.. (await repository.GetItemListAsync())];
 
         private void ToggleDetails(Guid itemId) => _expandedItemId = _expandedItemId == itemId ? null : itemId;
@@ -18,6 +22,21 @@ namespace Portfolio.ToDo.Web.Components.Pages
         {
             await repository.DeleteItemByIdAsync(itemId);
             _toDoItems = [.. (await repository.GetItemListAsync())];
+        }
+
+        private void ShowAddForm()
+        {
+            _showAddForm = true;
+            _newItem = new ToDoItem();
+        }
+
+        private void HideAddForm() => _showAddForm = false;
+
+        private async Task AddItem()
+        {
+            await repository.SaveItemAsync(_newItem);
+            _toDoItems = [.. (await repository.GetItemListAsync())];
+            _showAddForm = false;
         }
     }
 }

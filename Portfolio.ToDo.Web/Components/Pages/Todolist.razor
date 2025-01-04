@@ -3,6 +3,26 @@
 
 <h3>Todolist</h3>
 
+<button class="btn btn-primary" @onclick="ShowAddForm">Add New Item</button>
+
+@if (_showAddForm)
+{
+    <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" id="title" @bind="_newItem.Title" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="description">Description</label>
+        <input type="text" id="description" @bind="_newItem.Description" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="sortOrder">Sort Order</label>
+        <input type="number" id="sortOrder" @bind="_newItem.SortOrder" class="form-control" />
+    </div>
+    <button class="btn btn-success" @onclick="AddItem">Save</button>
+    <button class="btn btn-secondary" @onclick="HideAddForm">Cancel</button>
+}
+
 @if (_toDoItems != null && _toDoItems.Any())
 {
     <table class="table">
@@ -34,7 +54,7 @@
                     </td>
                 </tr>
                 <tr class="collapse @(item.Id == _expandedItemId ? "show" : "")">
-                    <td colspan="4">
+                    <td colspan="5">
                         <strong>Description:</strong> @item.Description
                     </td>
                 </tr>
