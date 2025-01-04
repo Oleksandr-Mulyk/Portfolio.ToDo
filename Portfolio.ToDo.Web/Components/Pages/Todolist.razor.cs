@@ -14,6 +14,12 @@ namespace Portfolio.ToDo.Web.Components.Pages
 
         private ToDoItem _newItem = new();
 
+        private Guid? _editItemId;
+
+        private bool _isEditingTitle = false;
+
+        private bool _isEditingDescription = false;
+
         protected override async Task OnInitializedAsync() => _toDoItems = [.. (await repository.GetItemListAsync())];
 
         private void ToggleDetails(Guid itemId) => _expandedItemId = _expandedItemId == itemId ? null : itemId;
@@ -37,6 +43,22 @@ namespace Portfolio.ToDo.Web.Components.Pages
             await repository.SaveItemAsync(_newItem);
             _toDoItems = [.. (await repository.GetItemListAsync())];
             _showAddForm = false;
+        }
+
+        private void EditItem(Guid itemId, bool isTitle)
+        {
+            _editItemId = itemId;
+            _isEditingTitle = isTitle;
+            _isEditingDescription = !isTitle;
+        }
+
+        private async Task SaveEditItem(IToDoItem item)
+        {
+            await repository.SaveItemAsync(item);
+            _editItemId = null;
+            _isEditingTitle = false;
+            _isEditingDescription = false;
+            _toDoItems = [.. (await repository.GetItemListAsync())];
         }
     }
 }

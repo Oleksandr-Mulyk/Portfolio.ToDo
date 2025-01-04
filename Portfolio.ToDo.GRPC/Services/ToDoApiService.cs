@@ -34,7 +34,7 @@ namespace Portfolio.ToDo.GRPC.Services
 
             IToDoItem toDoItem = new ToDoItem
             {
-                Id = toDoItemProto is null ? Guid.Parse(toDoItemProto!.Id) : Guid.Empty,
+                Id = toDoItemProto.Id is not null ? Guid.Parse(toDoItemProto!.Id) : Guid.Empty,
                 Title = toDoItemProto.Title,
                 Description = toDoItemProto.Description,
                 IsComplete = toDoItemProto.IsComplete,

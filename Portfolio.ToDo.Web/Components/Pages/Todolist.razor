@@ -39,7 +39,16 @@
             @foreach (var item in _toDoItems)
             {
                 <tr>
-                    <td>@item.Title</td>
+                    <td>
+                        @if (_editItemId == item.Id && _isEditingTitle)
+                        {
+                            <input type="text" @bind="item.Title" @onblur="() => SaveEditItem(item)" class="form-control" />
+                        }
+                        else
+                        {
+                            <span @onclick="() => EditItem(item.Id, true)">@item.Title</span>
+                        }
+                    </td>
                     <td>@item.IsComplete</td>
                     <td>@item.SortOrder</td>
                     <td>
@@ -55,7 +64,14 @@
                 </tr>
                 <tr class="collapse @(item.Id == _expandedItemId ? "show" : "")">
                     <td colspan="5">
-                        <strong>Description:</strong> @item.Description
+                        @if (_editItemId == item.Id && _isEditingDescription)
+                        {
+                            <input type="text" @bind="item.Description" @onblur="() => SaveEditItem(item)" class="form-control" />
+                        }
+                        else
+                        {
+                            <span @onclick="() => EditItem(item.Id, false)">@item.Description</span>
+                        }
                     </td>
                 </tr>
             }
