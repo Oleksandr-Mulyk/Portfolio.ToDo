@@ -12,6 +12,7 @@
                 <th>Is Complete</th>
                 <th>Sort Order</th>
                 <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -24,6 +25,11 @@
                     <td>
                         <button class="btn btn-link" @onclick="() => ToggleDetails(item.Id)">
                             Details
+                        </button>
+                    </td>
+                    <td>
+                        <button class="btn btn-danger" @onclick="() => DeleteItem(item.Id)">
+                            Delete
                         </button>
                     </td>
                 </tr>

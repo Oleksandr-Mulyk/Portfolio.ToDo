@@ -10,13 +10,14 @@ namespace Portfolio.ToDo.Web.Components.Pages
 
         private Guid? _expandedItemId;
 
-        protected override async Task OnInitializedAsync() =>
-            _toDoItems = [.. (await repository.GetItemListAsync())];
+        protected override async Task OnInitializedAsync() => _toDoItems = [.. (await repository.GetItemListAsync())];
 
-        private void ToggleDetails(Guid itemId)
+        private void ToggleDetails(Guid itemId) => _expandedItemId = _expandedItemId == itemId ? null : itemId;
+
+        private async Task DeleteItem(Guid itemId)
         {
-            _expandedItemId = _expandedItemId == itemId ? null : itemId;
-            StateHasChanged();
+            await repository.DeleteItemByIdAsync(itemId);
+            _toDoItems = [.. (await repository.GetItemListAsync())];
         }
     }
 }
