@@ -1,4 +1,5 @@
 ﻿@page "/"
+@rendermode InteractiveServer
 
 <h3>Todolist</h3>
 
@@ -10,6 +11,7 @@
                 <th>Title</th>
                 <th>Is Complete</th>
                 <th>Sort Order</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -19,6 +21,16 @@
                     <td>@item.Title</td>
                     <td>@item.IsComplete</td>
                     <td>@item.SortOrder</td>
+                    <td>
+                        <button class="btn btn-link" @onclick="() => ToggleDetails(item.Id)">
+                            Details
+                        </button>
+                    </td>
+                </tr>
+                <tr class="collapse @(item.Id == _expandedItemId ? "show" : "")">
+                    <td colspan="4">
+                        <strong>Description:</strong> @item.Description
+                    </td>
                 </tr>
             }
         </tbody>
