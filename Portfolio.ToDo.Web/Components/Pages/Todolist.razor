@@ -26,19 +26,14 @@
 @if (_toDoItems != null && _toDoItems.Any())
 {
     <table class="table">
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Is Complete</th>
-                <th>Sort Order</th>
-                <th></th>
-                <th></th>
-            </tr>
-        </thead>
+
         <tbody>
             @foreach (var item in _toDoItems)
             {
                 <tr>
+                    <td>
+                        <input type="checkbox" checked="@item.IsComplete" @onchange="(e) => OnCompleteChanged(item, e)" />
+                    </td>
                     <td>
                         @if (_editItemId == item.Id && _isEditingTitle)
                         {
@@ -49,7 +44,6 @@
                             <span @onclick="() => EditItem(item.Id, true)">@item.Title</span>
                         }
                     </td>
-                    <td>@item.IsComplete</td>
                     <td>@item.SortOrder</td>
                     <td>
                         <button class="btn btn-link" @onclick="() => ToggleDetails(item.Id)">

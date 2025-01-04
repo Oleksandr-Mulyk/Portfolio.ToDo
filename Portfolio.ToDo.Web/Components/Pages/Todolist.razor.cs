@@ -60,5 +60,11 @@ namespace Portfolio.ToDo.Web.Components.Pages
             _isEditingDescription = false;
             _toDoItems = [.. (await repository.GetItemListAsync())];
         }
+
+        private async Task OnCompleteChanged(IToDoItem item, ChangeEventArgs e)
+        {
+            item.IsComplete = (bool)(e.Value ?? false);
+            await SaveEditItem(item);
+        }
     }
 }
