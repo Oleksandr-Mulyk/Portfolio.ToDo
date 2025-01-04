@@ -32,7 +32,9 @@
             {
                 <tr>
                     <td>
-                        <input type="checkbox" checked="@item.IsComplete" @onchange="(e) => OnCompleteChanged(item, e)" />
+                        <input type="checkbox"
+                            checked="@item.IsComplete" @onchange="(e) => OnCompleteChanged(item, e)"
+                            role="button"/>
                     </td>
                     <td>
                         @if (_editItemId == item.Id && _isEditingTitle)
@@ -45,22 +47,17 @@
                         }
                     </td>
                     <td>
-                        <button class="btn btn-link" @onclick="() => ToggleDetails(item.Id)">
-                            Details
-                        </button>
+                        <span class="bi @(item.Id == _expandedItemId ? "bi-caret-up-square" : "bi-caret-down-square")"
+                              @onclick="() => ToggleDetails(item.Id)" role="button"></span>
                     </td>
                     <td>
                         <button class="btn btn-danger" @onclick="() => DeleteItem(item.Id)">
-                            Delete
+                            <span class="bi bi-trash"></span>
                         </button>
                     </td>
                     <td>
-                        <button class="btn btn-secondary" @onclick="() => MoveItemUp(item)">
-                            ↑
-                        </button>
-                        <button class="btn btn-secondary" @onclick="() => MoveItemDown(item)">
-                            ↓
-                        </button>
+                        <span class="bi bi-arrow-up" @onclick="() => MoveItemUp(item)" role="button"></span>
+                        <span class="bi bi-arrow-down" @onclick="() => MoveItemDown(item)" role="button"></span>
                     </td>
                 </tr>
                 <tr class="collapse @(item.Id == _expandedItemId ? "show" : "")">
