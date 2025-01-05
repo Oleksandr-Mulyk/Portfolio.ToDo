@@ -24,7 +24,7 @@
     <table class="table">
 
         <tbody>
-            @foreach (var item in _toDoItems)
+            @foreach (var item in PagedItems)
             {
                 <tr>
                     <td>
@@ -71,6 +71,7 @@
             }
         </tbody>
     </table>
+    <Pagination TotalItems="_toDoItems.Count" ItemsPerPage="ItemsPerPage" CurrentPage="CurrentPage" OnPageChanged="OnPageChanged" />
 }
 else
 {

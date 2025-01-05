@@ -4,8 +4,10 @@ using Portfolio.ToDo.ToDoList;
 
 namespace Portfolio.ToDo.Web.Components.Pages
 {
-    public partial class Todolist(IToDoRepository repository) : ComponentBase
+    public partial class Todolist(IToDoRepository repository, IConfiguration configuration) : ComponentBase
     {
+        const string TODO_ITEM_PER_PAGE_CONFIG_KEY = "AppSettings:ToDoItemsPerPage";
+
         private List<IToDoItem> _toDoItems = [];
 
         private Guid? _expandedItemId;
@@ -20,7 +22,15 @@ namespace Portfolio.ToDo.Web.Components.Pages
 
         private bool _isEditingDescription = false;
 
-        protected override async Task OnInitializedAsync() => _toDoItems = [.. (await repository.GetItemListAsync())];
+        private int CurrentPage { get; set; } = 1;
+
+        private int ItemsPerPage { get; set; }
+
+        protected override async Task OnInitializedAsync()
+        {
+            ItemsPerPage = configuration.GetValue<int>(TODO_ITEM_PER_PAGE_CONFIG_KEY);
+            _toDoItems = [.. (await repository.GetItemListAsync())];
+        }
 
         private void ToggleDetails(Guid itemId) => _expandedItemId = _expandedItemId == itemId ? null : itemId;
 
@@ -99,5 +109,9 @@ namespace Portfolio.ToDo.Web.Components.Pages
             }
             _toDoItems = [.. (await repository.GetItemListAsync())];
         }
+
+        private IEnumerable<IToDoItem> PagedItems => _toDoItems.Skip((CurrentPage - 1) * ItemsPerPage).Take(ItemsPerPage);
+
+        private void OnPageChanged(int page) => CurrentPage = page;
     }
 }
